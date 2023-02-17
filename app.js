@@ -6,15 +6,15 @@
     const timeout = 30000;
 
     const config  = {
-        channelAccessToken: 'ivRbthGsFusO4t+nBz4N5dFP6kHFAXFJEW8+D0RlQC1domS6qH1huJwnsSSomwkfBnYHSXlrJFP1B3QyC/1nG6hpLrDJccUYsPzYYP4zBG5QIphGlXGRtpTQTqWldDx+TCPbyJAa8r9drnwrZPIHvAdB04t89/1O/w1cDnyilFU=',
-        channelSecret: '8210401523a1d3b6413857216ba2cd92'
+        channelAccessToken: 'YOUR_CHANNEL_ACCESS_TOKEN',
+        channelSecret: 'YOUR_CHANNEL_SECRET'
     }
 
     const client = new line.Client(config);
 
     const app = express();
 
-    const OPENAI_API_KEY='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'
+    const OPENAI_API_KEY='OPENAI_API_KEY'
 
     const configuration = new Configuration({
         apiKey: OPENAI_API_KEY,
@@ -22,7 +22,7 @@
     const openai = new OpenAIApi(configuration);
     openai.apiVersion = apiVersion;
     openai.timeout = timeout;
-    
+
     app.post('/webhook', line.middleware(config), (req, res) => {
         Promise.all(req.body.events.map(handleEvent))
             .then((result) => res.json(result))
